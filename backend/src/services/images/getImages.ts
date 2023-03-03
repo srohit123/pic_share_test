@@ -6,12 +6,12 @@ import { INTERNAL_SERVER_ERROR } from '../../utils/constants'
 
 interface IGetImagesService {
   loggedInUserId: string | undefined;
-  skip ?: number;
-  limit ?: number;
+  skip: number;
+  limit: number;
 }
 
 class GetImagesService {
-  static async run ({ loggedInUserId, skip = 0, limit = 20 }: IGetImagesService): ServiceResponseReturnType {
+  static async run ({ loggedInUserId, skip, limit }: IGetImagesService): ServiceResponseReturnType {
     try {
       let images = []
 
@@ -23,8 +23,8 @@ class GetImagesService {
                         .leftJoin("image.favouriteImage", "favouriteImage", "favouriteImage.userId = :userId", { userId: loggedInUserId })
                         .leftJoin("image.user", "user")
                         .addSelect(["user.username", "favouriteImage"])
-                        .take(limit)
-                        .skip(skip)
+                        .limit(limit)
+                        .offset(skip)
                         .getMany()
                         
       } else {
@@ -33,8 +33,8 @@ class GetImagesService {
                         .select(SELECT_IMAGE_FIELDS)
                         .leftJoin("image.user","user")
                         .addSelect(["user.username"])
-                        .take(limit)
-                        .skip(skip)
+                        .limit(limit)
+                        .offset(skip)
                         .getMany()
       }
                     

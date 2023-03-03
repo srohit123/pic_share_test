@@ -8,8 +8,8 @@ class FavouriteImageController {
   static async GetFavouriteImages(request: Request, response: Response) {
     const [ errorObj, successObj ] = await GetFavouriteImageService.run({ 
       loggedInUserId: request.loggedInUserId,
-      skip: request.body.skip,
-      limit: request.body.limit,
+      skip: parseInt(request.query.skip?.toString() || "0"),
+      limit: parseInt(request.query.limit?.toString() || "20"), 
     })
 
     if (errorObj) {

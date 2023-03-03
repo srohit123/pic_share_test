@@ -10,7 +10,7 @@ interface IGetFavouriteImageService {
 }
 
 class GetFavouriteImageService {
-  static async run ({ loggedInUserId, skip = 0, limit = 20}: IGetFavouriteImageService): ServiceResponseReturnType {
+  static async run ({ loggedInUserId, skip, limit}: IGetFavouriteImageService): ServiceResponseReturnType {
     try {
 
       const imageRepository = AppDataSource.getRepository(FavouriteImage)
@@ -32,7 +32,7 @@ class GetFavouriteImageService {
         relations: {
           image: true
         },
-        skip,
+        skip: skip,
         take: limit
       })
                         

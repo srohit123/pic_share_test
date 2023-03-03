@@ -9,6 +9,13 @@ import { insertDummyTestData } from './utils/methodHelper'
 
 const app = express()
 const PORT = process.env.APP_PORT
+const corsConfiguration = {
+  origin: [/^http:\/\/\w+(\.\w+)*(:[0-9]+)?\/?$/],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  credentials: true,
+}
   
 const startServer = () => {
   app.listen(PORT , () => {
@@ -25,7 +32,7 @@ const setupGlobalMiddlewares = () => {
   app.use(express.urlencoded({ extended: true }))
 
   // Add cors
-  app.use(cors())
+  app.use(cors(corsConfiguration))
 }
 
 const startDatabase = async () => {

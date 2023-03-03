@@ -17,7 +17,9 @@ class ImageController {
     }
   
     const [errorObj, successObj] = await GetImagesService.run({ 
-      loggedInUserId: decodedToken && decodedToken.userId 
+      loggedInUserId: decodedToken && decodedToken.userId,
+      skip: parseInt(request.query.skip?.toString() || "0"),
+      limit: parseInt(request.query.limit?.toString() || "20"), 
     })
     if (errorObj) {
       failureResponse({ ...errorObj, response })
