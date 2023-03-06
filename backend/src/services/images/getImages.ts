@@ -25,7 +25,7 @@ class GetImagesService {
                         .addSelect(["user.username", "favouriteImage"])
                         .limit(limit)
                         .offset(skip)
-                        .getMany()
+                        .getManyAndCount()
                         
       } else {
         images = await AppDataSource
@@ -35,7 +35,7 @@ class GetImagesService {
                         .addSelect(["user.username"])
                         .limit(limit)
                         .offset(skip)
-                        .getMany()
+                        .getManyAndCount()
       }
                     
       return [null, { data: images }]                        

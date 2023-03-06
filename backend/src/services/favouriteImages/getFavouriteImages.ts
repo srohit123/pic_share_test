@@ -15,7 +15,7 @@ class GetFavouriteImageService {
 
       const imageRepository = AppDataSource.getRepository(FavouriteImage)
 
-      const response = await imageRepository.find({
+      const response = await imageRepository.findAndCount({
         where: {
           user: {
             id: loggedInUserId
