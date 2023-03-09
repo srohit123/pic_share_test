@@ -26,14 +26,15 @@ class GetFavouriteImageService {
             id: true,
             url: true,
             title: true,
-            created_date: true
+            created_date: true,
+            user: { username: true }
           }
         },
         order: {
           created_date: 'DESC'
         },
         relations: {
-          image: true
+          image: { user: true },
         },
         skip: skip,
         take: limit
