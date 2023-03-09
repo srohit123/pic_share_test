@@ -8,6 +8,7 @@ import apiClient from "../../utils/apiClients";
 import { getAuthHeader, getItem } from "../../utils/helpers";
 
 import { addImage as addNewImage } from "../slices/imageSlice";
+
 interface Payload {
   type: string;
   payload: {

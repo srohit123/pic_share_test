@@ -11,8 +11,8 @@ import { HOME, FAVOURITES, LOGIN } from "../utils/routesConstants";
 
 import ImageCard from "./ImageCard";
 import { Loader } from "./Loader";
-import { Error } from "./Error";
-import { NoData } from "./NoData"
+import Error from "./Error";
+import NoData from "./NoData"
 import { Auth } from "./Login";
 
 import { ImagesState } from "../redux/slices/imageSlice";
@@ -67,9 +67,7 @@ const CardsContainer: React.FC = () => {
   }, [isLoading, skipData, totalDataCount])
 
   if (error) {
-    return <>
-      <Error message="Something went wrong please try again..." />
-    </>
+    return <Error message="Something went wrong please try again..." />
   }
 
   if (!data.length && !isLoading) {

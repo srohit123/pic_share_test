@@ -1,6 +1,7 @@
 export type userType = {
   username: string;
 };
+
 export interface Image {
   id: string;
   title: string;

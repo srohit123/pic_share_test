@@ -14,6 +14,7 @@ interface Payload {
 interface Response {
   access_token: string;
 }
+
 const authenticateUser = async (username: string) => {
   try {
     const { data } = await apiClient.post<Response>("user/login", {

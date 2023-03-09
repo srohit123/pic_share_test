@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { handleResponse, handleResponseError } from "./interceptors";
 
-const baseURL = process.env.REACT_APP_BASE_PATH;
+const baseURL = process.env.REACT_APP_API_BASE_PATH;
 
 const axiosInstance = axios.create({
   baseURL,
