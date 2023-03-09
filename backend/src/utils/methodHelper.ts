@@ -38,6 +38,7 @@ export const insertDummyTestData = async (): Promise<void> => {
   if (!users || !users.length) {
 
     console.log('No Data Found. Inserting Dummy Test Data...')
+    console.log('Please wait for 2 minutes!!')
     const testUser = new User()
     testUser.username = 'test'
     const testUserData = await userRepository.save(testUser)
