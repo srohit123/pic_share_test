@@ -17,5 +17,5 @@ export const AppDataSource = new DataSource({
   entities: [User, Image, FavouriteImage],
   migrations: [initial1677755951256],
   synchronize: false,
-  logging: true,
+  logging: false,
 })
