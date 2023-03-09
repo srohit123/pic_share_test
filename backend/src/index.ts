@@ -45,12 +45,12 @@ const startDatabase = async () => {
 }
 
 const runMigrations = async () => {
-  console.log('"Running migrations...')
+  console.log('Checking database for Running the migrations...')
   return AppDataSource.runMigrations()
 }
 
 const insertTestData = async () => {
-  console.log('Inserting Dummy Test Data...')
+  console.log('Checking Database for Inserting Dummy Test Data...')
   return insertDummyTestData()
 }
 

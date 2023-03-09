@@ -27,32 +27,41 @@ export const getDecodedToken = (token: string) => {
   return tokenResponse
 }
 
+const delay = (time: number) => {
+  return new Promise(resolve => setTimeout(resolve, time))
+}
+
 export const insertDummyTestData = async (): Promise<void> => {
   const userRepository = AppDataSource.getRepository(User)
 
   const users = await userRepository.find()
   if (!users || !users.length) {
+
+    console.log('No Data Found. Inserting Dummy Test Data...')
     const testUser = new User()
     testUser.username = 'test'
     const testUserData = await userRepository.save(testUser)
 
     const images = []
 
-    for (let index = 0; index < 50; index++) {
+    for (let index = 0; index < 35; index++) {
       const id = index + 1
-      images.push({
-        url: 'https://plus.unsplash.com/premium_photo-1663936756535-6c29f2dc04a4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
-        title: `Test_${id}`,
-        user: testUserData
-      })
+      images.push(id)
     }
+    
+    const imageRepository = AppDataSource.getRepository(Image)
+    const imageURL = 'https://plus.unsplash.com/premium_photo-1663936756535-6c29f2dc04a4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80'
 
-    await AppDataSource
-    .createQueryBuilder(Image, "image")
-    .insert()
-    .values(images)
-    .execute()
+    for await (let image of images) {  
+      const newImageObj = new Image()
+      newImageObj.url = imageURL
+      newImageObj.title = `Test_${image}`
+      newImageObj.user = testUserData
+      await imageRepository.save(newImageObj)
+      await delay(1000)
+    }
 
     console.log('Dummy data has been successfully inserted!')
   }
+  console.log('Dummy Test data has been already inserted!!')
 }
