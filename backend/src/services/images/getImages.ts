@@ -25,6 +25,7 @@ class GetImagesService {
                         .addSelect(["user.username", "favouriteImage"])
                         .limit(limit)
                         .offset(skip)
+                        .orderBy("image.created_date", "DESC")
                         .getManyAndCount()
                         
       } else {
@@ -35,6 +36,7 @@ class GetImagesService {
                         .addSelect(["user.username"])
                         .limit(limit)
                         .offset(skip)
+                        .orderBy("image.created_date", "DESC")
                         .getManyAndCount()
       }
                     

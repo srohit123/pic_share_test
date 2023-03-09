@@ -29,6 +29,9 @@ class GetFavouriteImageService {
             created_date: true
           }
         },
+        order: {
+          created_date: 'DESC'
+        },
         relations: {
           image: true
         },
